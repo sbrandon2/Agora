@@ -65,9 +65,9 @@ void DataGenerator::DoDataGeneration(const std::string& directory) {
 
         pkt->Set(0, pkt_id, ue_id, cfg_->MacPayloadMaxLength());
         this->GenMacData(pkt, ue_id);
-        pkt->Crc((uint16_t)(
-            crc_obj_->CalculateCrc24(pkt->Data(), cfg_->MacPayloadMaxLength()) &
-            0xFFFF));
+        pkt->Crc((uint16_t)(crc_obj_->CalculateCrc24(
+                                pkt->Data(), cfg_->MacPayloadMaxLength()) &
+                            0xFFFF));
       }
     }
 
@@ -338,15 +338,15 @@ void DataGenerator::DoDataGeneration(const std::string& directory) {
 
         pkt->Set(0, pkt_id, ue_id, cfg_->MacPayloadMaxLength());
         this->GenMacData(pkt, ue_id);
-        pkt->Crc((uint16_t)(
-            crc_obj_->CalculateCrc24(pkt->Data(), cfg_->MacPayloadMaxLength()) &
-            0xFFFF));
+        pkt->Crc((uint16_t)(crc_obj_->CalculateCrc24(
+                                pkt->Data(), cfg_->MacPayloadMaxLength()) &
+                            0xFFFF));
       }
     }
 
     {
       const std::string filename_input =
-          directory + "/data/orig_dl_data_" +
+          directory + "/data/bin/orig_dl_data_" +
           std::to_string(this->cfg_->OfdmCaNum()) + "_ant" +
           std::to_string(this->cfg_->UeAntNum()) + ".bin";
       MLPD_INFO("Saving downlink MAC data to %s\n", filename_input.c_str());
@@ -410,7 +410,7 @@ void DataGenerator::DoDataGeneration(const std::string& directory) {
     {
       // Save downlink information bytes to file
       const std::string filename_input =
-          directory + "/data/LDPC_orig_dl_data_" +
+          directory + "/data/bin/LDPC_orig_dl_data_" +
           std::to_string(this->cfg_->OfdmCaNum()) + "_ant" +
           std::to_string(this->cfg_->UeAntNum()) + ".bin";
       MLPD_INFO("Saving raw dl data (using LDPC) to %s\n",
@@ -581,7 +581,7 @@ void DataGenerator::DoDataGeneration(const std::string& directory) {
     }
 
     std::string filename_dl_tx =
-        directory + "/data/LDPC_dl_tx_data_" +
+        directory + "/data//bin/LDPC_dl_tx_data_" +
         std::to_string(this->cfg_->OfdmCaNum()) + "_ant" +
         std::to_string(this->cfg_->BsAntNum()) + ".bin";
     MLPD_INFO("Saving dl tx data to %s\n", filename_dl_tx.c_str());

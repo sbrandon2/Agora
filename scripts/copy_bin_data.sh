@@ -13,5 +13,5 @@ while getopts 'a:' flag; do
        exit 1 ;;
   esac
 done
-echo "Copying ../data/bin folder to" $ip_flag":/scratch/repos/agora-newconfig/data/"
-scp -r ../data/bin root@$ip_flag:/scratch/repos/agora-newconfig/data/
+echo "Copying ../data/bin folder to" $ip_flag":/scratch/repos/agora/data/"
+scp -r ../data/bin root@$ip_flag:/scratch/repos/agora/data/

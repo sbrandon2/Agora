@@ -636,7 +636,7 @@ void Config::GenData() {
 #else
   std::string cur_directory = TOSTRING(PROJECT_DIRECTORY);
   if (this->frame_.NumUlDataSyms() > 0) {
-    std::string ul_data_file = cur_directory + "/data/LDPC_orig_ul_data_" +
+    std::string ul_data_file = cur_directory + "/data/bin/LDPC_orig_ul_data_" +
                                std::to_string(this->ofdm_ca_num_) + "_ant" +
                                std::to_string(this->ue_ant_total_) + ".bin";
     MLPD_SYMBOL("Config: Reading raw ul data from %s\n", ul_data_file.c_str());
@@ -681,7 +681,7 @@ void Config::GenData() {
   }
 
   if (this->frame_.NumDlDataSyms() > 0) {
-    std::string dl_data_file = cur_directory + "/data/LDPC_orig_dl_data_" +
+    std::string dl_data_file = cur_directory + "/data/bin/LDPC_orig_dl_data_" +
                                std::to_string(this->ofdm_ca_num_) + "_ant" +
                                std::to_string(this->ue_ant_total_) + ".bin";
 

@@ -46,7 +46,8 @@ static unsigned int CheckCorrectnessUl(Config const* const cfg) {
   int ul_pilot_syms = cfg->Frame().ClientUlPilotSymbols();
 
   std::string cur_directory = TOSTRING(PROJECT_DIRECTORY);
-  std::string raw_data_filename = cur_directory + "/data/LDPC_orig_ul_data_" +
+  std::string raw_data_filename = cur_directory +
+                                  "/data/bin/LDPC_orig_ul_data_" +
                                   std::to_string(cfg->OfdmCaNum()) + "_ant" +
                                   std::to_string(cfg->UeNum()) + ".bin";
   std::string output_data_filename = cur_directory + "/data/decode_data.bin";
@@ -103,7 +104,7 @@ unsigned int CheckCorrectnessDl(Config const* const cfg) {
   const size_t samps_per_symbol = cfg->SampsPerSymbol();
 
   std::string cur_directory = TOSTRING(PROJECT_DIRECTORY);
-  std::string raw_data_filename = cur_directory + "/data/LDPC_dl_tx_data_" +
+  std::string raw_data_filename = cur_directory + "/data/bin/LDPC_dl_tx_data_" +
                                   std::to_string(ofdm_ca_num) + "_ant" +
                                   std::to_string(bs_ant_num) + ".bin";
   std::string tx_data_filename = cur_directory + "/data/tx_data.bin";

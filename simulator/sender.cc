@@ -71,7 +71,7 @@ Sender::Sender(Config* cfg, size_t socket_thread_num, size_t core_offset,
   }
 
   InitIqFromFile(std::string(TOSTRING(PROJECT_DIRECTORY)) +
-                 "/data/LDPC_rx_data_" + std::to_string(cfg->OfdmCaNum()) +
+                 "/data/bin/LDPC_rx_data_" + std::to_string(cfg->OfdmCaNum()) +
                  "_ant" + std::to_string(cfg->BsAntNum()) + ".bin");
 
   task_ptok_ =
