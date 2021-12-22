@@ -73,7 +73,7 @@ void DataGenerator::DoDataGeneration(const std::string& directory) {
 
     {
       const std::string filename_input =
-          directory + "/data/orig_ul_data_" +
+          directory + "/data/bin/orig_ul_data_" +
           std::to_string(this->cfg_->OfdmCaNum()) + "_ant" +
           std::to_string(this->cfg_->UeAntNum()) + ".bin";
       MLPD_INFO("Saving uplink MAC data to %s\n", filename_input.c_str());
@@ -135,7 +135,7 @@ void DataGenerator::DoDataGeneration(const std::string& directory) {
 
     {
       const std::string filename_input =
-          directory + "/data/LDPC_orig_ul_data_" +
+          directory + "/data/bin/LDPC_orig_ul_data_" +
           std::to_string(this->cfg_->OfdmCaNum()) + "_ant" +
           std::to_string(this->cfg_->UeAntNum()) + ".bin";
       MLPD_INFO("Saving raw uplink data (using LDPC) to %s\n",
@@ -295,7 +295,7 @@ void DataGenerator::DoDataGeneration(const std::string& directory) {
     }
   }
 
-  std::string filename_rx = directory + "/data/LDPC_rx_data_" +
+  std::string filename_rx = directory + "/data/bin/LDPC_rx_data_" +
                             std::to_string(this->cfg_->OfdmCaNum()) + "_ant" +
                             std::to_string(this->cfg_->BsAntNum()) + ".bin";
   MLPD_INFO("Saving rx data to %s\n", filename_rx.c_str());
