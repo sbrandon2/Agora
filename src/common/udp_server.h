@@ -37,7 +37,8 @@ class UDPServer {
     if (kDebugPrintUdpServerInit) {
       std::printf("Creating UDP server listening at port %d\n", port);
     }
-    sock_fd_ = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, IPPROTO_UDP);
+    sock_fd_ = socket(AF_INET6, SOCK_DGRAM | SOCK_NONBLOCK,
+                      IPPROTO_UDP);  //possible change, added a 6
     if (sock_fd_ == -1) {
       throw std::runtime_error("UDPServer: Failed to create local socket.");
     }
@@ -77,14 +78,19 @@ class UDPServer {
       }
     }
 
-    struct sockaddr_in serveraddr;
-    serveraddr.sin_family = AF_INET;
-    serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    serveraddr.sin_port = htons(static_cast<unsigned short>(port));
-    std::memset(serveraddr.sin_zero, 0u, sizeof(serveraddr.sin_zero));
+    struct sockaddr_in6 serveraddr6;                    //added a 6
+    serveraddr6.sin6_family = AF_INET6;                 //added a 6
+    serveraddr6.sin6_addr.s_addr = htonl(in6addr_any);  //added a 6
+    serveraddr6.sin6_addr = in6addr_any;                //added a new line
+    serveraddr6.sin6_addr.s_addr = in6addr_any;         //added a new line again
+    serveraddr6.sin6_port = htons(static_cast<unsigned short>(port));
+    std::memset(
+        serveraddr6.sin_zero, 0u,
+        sizeof(serveraddr6.sin_zero));  //don't know if sin_zero needs anything
 
-    ret = bind(sock_fd_, reinterpret_cast<struct sockaddr*>(&serveraddr),
-               sizeof(serveraddr));
+    ret = bind(sock_fd_,
+               reinterpret_cast<struct sockaddr*>(&serveraddr6),  //changed
+               sizeof(serveraddr6));                              //changed
     if (ret != 0) {
       throw std::runtime_error("UDPServer: Failed to bind socket to port " +
                                std::to_string(port) +
@@ -153,9 +159,9 @@ class UDPServer {
       char port_str[16u];
       snprintf(port_str, sizeof(port_str), "%u", src_port);
 
-      struct addrinfo hints;
+      struct addrinfo hints;  //possible change?
       std::memset(&hints, 0, sizeof(hints));
-      hints.ai_family = AF_INET;
+      hints.ai_family = AF_INET6;  // add a 6
       hints.ai_socktype = SOCK_DGRAM;
       hints.ai_protocol = IPPROTO_UDP;
 
@@ -170,7 +176,7 @@ class UDPServer {
       std::pair<std::map<std::string, struct addrinfo*>::iterator, bool>
           map_insert_result;
       {  // Synchronize access to insert for thread safety
-        std::scoped_lock map_access(map_insert_access_);
+        std::scoped_lock map_access(map_insert_access_);  //unknown error
         map_insert_result = addrinfo_map_.insert(
             std::pair<std::string, struct addrinfo*>(remote_uri, rem_addrinfo));
       }

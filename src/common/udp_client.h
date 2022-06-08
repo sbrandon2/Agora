@@ -34,7 +34,8 @@ class UDPClient {
     if (kDebugPrintUdpClientInit) {
       std::printf("Creating UDP Client socket\n");
     }
-    sock_fd_ = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    sock_fd_ = socket(AF_INET6, SOCK_DGRAM,
+                      IPPROTO_UDP);  //possible change, added a 6  //
     if (sock_fd_ == -1) {
       throw std::runtime_error("UDPClient: Failed to create local socket.");
     }
@@ -83,9 +84,9 @@ class UDPClient {
       char port_str[16u];
       snprintf(port_str, sizeof(port_str), "%u", rem_port);
 
-      struct addrinfo hints;
+      struct addrinfo hints;  // maybe important
       std::memset(&hints, 0, sizeof(hints));
-      hints.ai_family = AF_INET;
+      hints.ai_family = AF_INET6;  //possible change, added a 6
       hints.ai_socktype = SOCK_DGRAM;
       hints.ai_protocol = IPPROTO_UDP;
 
